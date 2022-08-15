@@ -34,5 +34,9 @@ public class Book {
     this.category = category;
   }
 
-
+  public void delete() {
+    //Todo: Business(Custom) Exception 으로 교체하기. + message 추가 필요
+    if(this.deletedBy != null) throw new RuntimeException();
+    this.deletedBy = LocalDateTime.now();
+  }
 }
