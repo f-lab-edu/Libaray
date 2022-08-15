@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -19,4 +20,12 @@ public class Book {
   private String isbn;
   @Enumerated(EnumType.STRING)
   private BookCategory category;
+
+  @Builder
+  public Book(String title, String content, String isbn, BookCategory category) {
+    this.title = title;
+    this.content = content;
+    this.isbn = isbn;
+    this.category = category;
+  }
 }
