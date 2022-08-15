@@ -1,5 +1,6 @@
 package flab.library.book.domain.entity;
 
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,6 +21,8 @@ public class Book {
   private String isbn;
   @Enumerated(EnumType.STRING)
   private BookCategory category;
+
+  private LocalDateTime deletedBy;
 
   @Builder
   public Book(String title, String content, String isbn, BookCategory category) {

@@ -17,5 +17,4 @@ public class BookFacade {
     return bookService.createBook(book);
   }
 
-
 }
