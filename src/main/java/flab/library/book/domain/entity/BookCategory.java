@@ -4,4 +4,5 @@ import javax.persistence.Enumerated;
 
 
 public enum BookCategory {
+  NOVEL;
 }
