@@ -17,4 +17,8 @@ public class BookFacade {
     return bookService.createBook(book);
   }
 
+  //Todo: Controller에서 bookId에 대한 검증이 필요함. (require)
+  public void deleteBook(Long bookId) {
+    bookService.deleteById(bookId);
+  }
 }
