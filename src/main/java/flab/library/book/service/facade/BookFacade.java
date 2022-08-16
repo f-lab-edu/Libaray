@@ -14,9 +14,10 @@ import org.springframework.stereotype.Component;
 public class BookFacade {
   private final BookService bookService;
 
-  public Long createBook(BookCreateRequest request) {
+  public BookCreateResponse createBook(BookCreateRequest request) {
     Book book = request.toEntity();
-    return bookService.createBook(book);
+    Long saveBookId = bookService.createBook(book);
+    return new BookCreateResponse(saveBookId);
   }
 
   //Todo: Controller에서 bookId에 대한 검증이 필요함. (require)
