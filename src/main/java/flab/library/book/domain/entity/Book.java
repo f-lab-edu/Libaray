@@ -1,5 +1,8 @@
 package flab.library.book.domain.entity;
 
+import static flab.library.book.dto.BookDto.*;
+
+import flab.library.book.dto.BookDto;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -38,5 +41,9 @@ public class Book {
     //Todo: Business(Custom) Exception 으로 교체하기. + message 추가 필요
     if(this.deletedBy != null) throw new RuntimeException();
     this.deletedBy = LocalDateTime.now();
+  }
+  public void update(BookUpdateDto updateDto) {
+    this.title = updateDto.getTitle();
+    this.content = updateDto.getContent();
   }
 }
