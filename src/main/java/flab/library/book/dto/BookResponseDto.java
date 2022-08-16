@@ -9,6 +9,15 @@ import lombok.Getter;
 public class BookResponseDto {
 
   @Getter
+  public static class BookCreateResponse {
+    private Long saveBookId;
+
+    public BookCreateResponse(Long saveBookId) {
+      this.saveBookId = saveBookId;
+    }
+  }
+
+  @Getter
   public static class BookUpdateResponse {
     private String title;
     private String content;
