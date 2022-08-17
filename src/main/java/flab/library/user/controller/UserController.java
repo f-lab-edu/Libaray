@@ -9,14 +9,17 @@ import flab.library.user.domain.UserVO;
 import flab.library.user.domain.entity.LibUser;
 import flab.library.user.dto.SignInDto;
 import flab.library.user.dto.SignUpDto;
+import flab.library.user.dto.UpdatePwdDto;
 import flab.library.user.service.LibUserService;
 import flab.library.user.service.SessionService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,6 +66,20 @@ public class UserController {
 
 		return ResponseEntity.ok()
 			.body(CommonResponse.success(null, "SignUp Completed"));
+	}
+
+	@PatchMapping("/password")
+	public ResponseEntity<CommonResponse<String>> updatePassword(
+		@RequestBody UpdatePwdDto.Request updatePwdDto
+	){
+		User user = (User)sessionService.getCurrentUserDetails();
+		updatePwdDto.setId(user.getUsername());
+
+		libUserService.updatePassword(updatePwdDto);
+
+		SecurityContextHolder.clearContext();
+		return ResponseEntity.ok()
+			.body(CommonResponse.success(null, "Update Password Completed"));
 	}
 
 }
