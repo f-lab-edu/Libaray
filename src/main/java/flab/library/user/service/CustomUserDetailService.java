@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Service
+@Service(value = "userDetailsService")
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
 
