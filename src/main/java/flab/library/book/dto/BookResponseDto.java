@@ -31,4 +31,19 @@ public class BookResponseDto {
       this.category = book.getCategory();
     }
   }
+  @Getter
+  public static class BookResponse {
+    private String title;
+    private String content;
+    private String isbn;
+    private BookCategory category;
+
+    public BookResponse(Book book) {
+      this.title = book.getTitle();
+      this.content = book.getContent();
+      this.isbn = book.getIsbn();
+      this.category = book.getCategory();
+    }
+  }
+
 }
