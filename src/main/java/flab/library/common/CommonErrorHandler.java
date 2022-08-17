@@ -1,5 +1,8 @@
 package flab.library.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import flab.library.common.dto.CommonResponse;
 
 import javax.validation.ConstraintViolationException;
@@ -8,7 +11,9 @@ import flab.library.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,6 +43,20 @@ public class CommonErrorHandler {
 		log.error("[ {} ] : {}", e.getClass(), e.getMessage());
 		//Todo: 공통 에러코드 정의할 필요가 있다.
 		return CommonResponse.fail(e.getMessage(), 500);
+	}
+
+	// @Valid 로 검증된 에러 공통 Advice
+	@ResponseBody
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(value = MethodArgumentNotValidException.class)
+	public CommonResponse onMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+		log.error("[ {} ] : {}", e.getClass(), e.getMessage());
+		//Todo: 공통 에러코드 정의할 필요가 있다.
+		List<String> fieldErrors = new ArrayList<>();
+		for(FieldError error : e.getBindingResult().getFieldErrors()){
+			fieldErrors.add(error.getDefaultMessage());
+		}
+		return CommonResponse.fail("Valid Error" ,fieldErrors, 501);
 	}
 
 	// Business Exception Control

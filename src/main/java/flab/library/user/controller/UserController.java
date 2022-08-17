@@ -2,6 +2,8 @@ package flab.library.user.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import flab.library.common.dto.CommonResponse;
 import flab.library.common.exception.BusinessException;
 import flab.library.common.exception.BusinessExceptionDictionary;
@@ -14,6 +16,7 @@ import flab.library.user.service.LibUserService;
 import flab.library.user.service.SessionService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/users")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
 	private final SessionService sessionService;
@@ -60,7 +64,7 @@ public class UserController {
 
 	@PostMapping("/sign-up")
 	public ResponseEntity<CommonResponse<String>> signUp(
-		@RequestBody SignUpDto.Request signUpDto
+		@RequestBody @Valid SignUpDto.Request signUpDto
 	) {
 		libUserService.signUp(signUpDto);
 
@@ -70,8 +74,9 @@ public class UserController {
 
 	@PatchMapping("/password")
 	public ResponseEntity<CommonResponse<String>> updatePassword(
-		@RequestBody UpdatePwdDto.Request updatePwdDto
+		@RequestBody @Valid UpdatePwdDto.Request updatePwdDto
 	){
+		log.info(updatePwdDto.toString());
 		User user = (User)sessionService.getCurrentUserDetails();
 		updatePwdDto.setId(user.getUsername());
 
