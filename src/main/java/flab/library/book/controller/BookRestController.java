@@ -46,10 +46,11 @@ public class BookRestController {
     //Todo: null 이 아니라 Void에 알맞는 CommonResponse 수정이 필요할 듯 보임
     return CommonResponse.success(null);
   }
+
   @GetMapping
   public CommonResponse showBooks(@PageableDefault(page = 0, size = 10) Pageable pageable) {
     Page<BookResponse> allBooks = bookFacade.getAllBooks(pageable);
-    return CommonResponse.success(allBooks, "책 전체 목록 조회(page, size) 매개변수를 통해 페이징")
+    return CommonResponse.success(allBooks, "책 전체 목록 조회(page, size) 매개변수를 통해 페이징");
   }
 
 }
