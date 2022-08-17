@@ -40,14 +40,9 @@ public class SecurityConfig  {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-//                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
-
-                // .authorizeRequests()
-                // .antMatchers("/v1/sign-in").authenticated()
-                // .anyRequest().permitAll()
 
                 .authorizeRequests()
-//                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .antMatchers("/v1/users/sign-up").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
