@@ -3,11 +3,15 @@ package flab.library.book.controller;
 import flab.library.book.dto.BookRequestDto.BookCreateRequest;
 import flab.library.book.dto.BookRequestDto.BookUpdateRequest;
 import flab.library.book.dto.BookResponseDto.BookCreateResponse;
+import flab.library.book.dto.BookResponseDto.BookResponse;
 import flab.library.book.dto.BookResponseDto.BookUpdateResponse;
 import flab.library.book.service.facade.BookFacade;
 import flab.library.common.dto.CommonResponse;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +45,11 @@ public class BookRestController {
     bookFacade.deleteBook(bookId);
     //Todo: null 이 아니라 Void에 알맞는 CommonResponse 수정이 필요할 듯 보임
     return CommonResponse.success(null);
+  }
+  @GetMapping
+  public CommonResponse showBooks(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+    Page<BookResponse> allBooks = bookFacade.getAllBooks(pageable);
+    return CommonResponse.success(allBooks, "책 전체 목록 조회(page, size) 매개변수를 통해 페이징")
   }
 
 }
