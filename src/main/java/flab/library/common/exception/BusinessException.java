@@ -15,4 +15,8 @@ public class BusinessException extends RuntimeException{
 	static public BusinessException create(BusinessExceptionDictionary businessException){
 		return new BusinessException(PREFIX + businessException.getReason(), businessException.getCode());
 	}
+
+	static public void createAndThrow(BusinessExceptionDictionary businessException) {
+		throw new BusinessException(PREFIX + businessException.getReason(), businessException.getCode());
+	}
 }

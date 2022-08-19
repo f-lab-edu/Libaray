@@ -4,8 +4,13 @@ import flab.library.book.domain.entity.Book;
 import flab.library.book.dto.BookDto.BookUpdateDto;
 import flab.library.book.repository.BookRepository;
 import javax.transaction.Transactional;
+
+import flab.library.common.exception.BusinessException;
+import flab.library.common.exception.BusinessExceptionDictionary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import static flab.library.common.exception.BusinessExceptionDictionary.*;
 
 @Service
 @Transactional
@@ -21,14 +26,14 @@ public class BookServiceImpl implements BookService{
 
   @Override
   public void deleteById(Long bookId) {
-    //Todo: RuntimeException CustomException으로 변경 필요
-    bookRepository.findById(bookId).ifPresentOrElse(Book::delete, RuntimeException::new);
+    bookRepository.findById(bookId).ifPresentOrElse(Book::delete
+            , () -> BusinessException.createAndThrow(BOOK_NOT_FOUND_EXCEPTION));
   }
 
   @Override
   public Book updateBook(Long bookId, BookUpdateDto updateDto) {
-    //Todo: RuntimeException CustomException으로 변경 필요
-    Book findBook = bookRepository.findById(bookId).orElseThrow(RuntimeException::new);
+    Book findBook = bookRepository.findById(bookId)
+            .orElseThrow(() -> BusinessException.create(BOOK_NOT_FOUND_EXCEPTION));
     findBook.update(updateDto);
     return findBook;
   }

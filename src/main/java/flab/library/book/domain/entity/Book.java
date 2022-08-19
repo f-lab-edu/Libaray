@@ -1,6 +1,7 @@
 package flab.library.book.domain.entity;
 
 import static flab.library.book.dto.BookDto.*;
+import static flab.library.common.exception.BusinessExceptionDictionary.*;
 
 import flab.library.book.dto.BookDto;
 import java.time.LocalDateTime;
@@ -10,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import flab.library.common.exception.BusinessException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,8 +41,7 @@ public class Book {
   }
 
   public void delete() {
-    //Todo: Business(Custom) Exception 으로 교체하기. + message 추가 필요
-    if(this.deletedBy != null) throw new RuntimeException();
+    if(this.deletedBy != null) throw BusinessException.create(DELETED_ENTITY_EXCEPTION);
     this.deletedBy = LocalDateTime.now();
   }
   public void update(BookUpdateDto updateDto) {
