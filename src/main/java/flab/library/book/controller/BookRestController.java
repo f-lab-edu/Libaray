@@ -43,8 +43,7 @@ public class BookRestController {
   @DeleteMapping("/{bookId}")
   public CommonResponse<Void> deleteBook(@PathVariable Long bookId) {
     bookFacade.deleteBook(bookId);
-    //Todo: null 이 아니라 Void에 알맞는 CommonResponse 수정이 필요할 듯 보임
-    return CommonResponse.success(null);
+    return CommonResponse.success();
   }
 
   @GetMapping

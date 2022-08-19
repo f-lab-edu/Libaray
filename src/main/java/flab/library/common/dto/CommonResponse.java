@@ -13,6 +13,10 @@ public class CommonResponse<T> {
   private String message;
   private int code;
 
+  public static CommonResponse<Void> success() {
+    return success(null, null);
+  }
+
   public static <T> CommonResponse<T> success(T data) {
     return success(data, null);
   }
