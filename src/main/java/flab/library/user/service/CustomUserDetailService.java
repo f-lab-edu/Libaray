@@ -37,8 +37,8 @@ public class CustomUserDetailService implements UserDetailsService {
 
     private User createUser(String username, LibUser user) throws UsernameNotFoundException{
         if (!user.isActive()) {
-            log.info(username + " -> 사용하지 않는 아이디입니다.");
-            throw new UsernameNotFoundException(username + " -> 사용하지 않는 아이디입니다.");
+            log.info(username + " -> 정지된 아이디입니다.");
+            throw new UsernameNotFoundException(username + " -> 정지된 아이디입니다.");
         }
 
         //TODO: give permission here
