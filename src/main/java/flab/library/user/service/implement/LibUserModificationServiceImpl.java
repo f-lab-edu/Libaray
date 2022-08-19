@@ -27,4 +27,18 @@ public class LibUserModificationServiceImpl {
 		libUser.setPassword(updateDto.getPassword());
 		libUserRepository.save(libUser);
 	}
+
+	void deactivateUser(String id){
+		LibUser libUser = libUserRepository.findById(id)
+			.orElseThrow(() -> new UsernameNotFoundException(id + "not found, cannot make inactive"));
+		libUser.setActive(false);
+		libUserRepository.save(libUser);
+	}
+
+	void activateUser(String id){
+		LibUser libUser = libUserRepository.findById(id)
+			.orElseThrow(() -> new UsernameNotFoundException(id + "not found, cannot make inactive"));
+		libUser.setActive(true);
+		libUserRepository.save(libUser);
+	}
 }

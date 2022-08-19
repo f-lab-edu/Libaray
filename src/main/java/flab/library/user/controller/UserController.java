@@ -23,6 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,7 +77,6 @@ public class UserController {
 	public ResponseEntity<CommonResponse<String>> updatePassword(
 		@RequestBody @Valid UpdatePwdDto.Request updatePwdDto
 	){
-		log.info(updatePwdDto.toString());
 		User user = (User)sessionService.getCurrentUserDetails();
 		updatePwdDto.setId(user.getUsername());
 
@@ -85,6 +85,24 @@ public class UserController {
 		SecurityContextHolder.clearContext();
 		return ResponseEntity.ok()
 			.body(CommonResponse.success(null, "Update Password Completed"));
+	}
+
+	@PatchMapping("/id/{id}/deactivate")
+	public ResponseEntity<CommonResponse<String>> deactivateUser(@PathVariable String id){
+		libUserService.deactivateUser(id);
+		SecurityContextHolder.clearContext();
+		return ResponseEntity.ok()
+			.body(CommonResponse.success(null, "Deactivate User Completed"));
+
+	}
+
+	@PatchMapping("/id/{id}/activate")
+	public ResponseEntity<CommonResponse<String>> activateUser(@PathVariable String id){
+		libUserService.activateUser(id);
+		SecurityContextHolder.clearContext();
+		return ResponseEntity.ok()
+			.body(CommonResponse.success(null, "Activate User Completed"));
+
 	}
 
 }

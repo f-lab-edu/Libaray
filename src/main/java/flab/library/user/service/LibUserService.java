@@ -12,5 +12,7 @@ public interface LibUserService {
 	List<UserVO> getLibUserList();
 	void signUp(SignUpDto.Request signUpDto);
 	void updatePassword(UpdatePwdDto.Request updatePwdDto);
+	void deactivateUser(String id);
+	void activateUser(String id);
 
 }

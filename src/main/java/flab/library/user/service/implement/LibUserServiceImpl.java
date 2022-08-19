@@ -40,4 +40,14 @@ public class LibUserServiceImpl implements LibUserService {
 	public void updatePassword(UpdatePwdDto.Request updatePwdDto) {
 		libUserModificationService.updateLibUserPassword(updatePwdDto);
 	}
+
+	@Override
+	public void deactivateUser(String id) {
+		libUserModificationService.deactivateUser(id);
+	}
+
+	@Override
+	public void activateUser(String id) {
+		libUserModificationService.activateUser(id);
+	}
 }
