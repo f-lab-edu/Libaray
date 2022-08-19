@@ -4,8 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum BusinessExceptionDictionary {
+	UNKNOWN("Unknown", "B000"),
+	BOOK_NOT_FOUND_EXCEPTION("Book not found", "B001"),
+	DELETED_ENTITY_EXCEPTION("The entity has already been deleted.", "B101");
 
-	UNKNOWN("Unknown", "B000");
 	private final String reason;
 	private final String code;
 
