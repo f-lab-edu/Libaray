@@ -19,7 +19,7 @@ public class Rental {
     @EmbeddedId
     RentalId rentalId;
 
-    private Boolean isReturn;
+    private boolean isReturn;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
