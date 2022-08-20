@@ -3,6 +3,7 @@ package flab.library.book.domain.entity;
 import static flab.library.book.dto.BookDto.*;
 import static flab.library.common.exception.BusinessExceptionDictionary.*;
 
+
 import flab.library.book.dto.BookDto;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
@@ -11,7 +12,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import flab.library.common.exception.BusinessException;
 import lombok.Builder;
 import lombok.Getter;
