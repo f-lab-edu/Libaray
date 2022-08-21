@@ -16,15 +16,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RentalServiceImpl implements RentalService {
   private final RentalRepository rentalRepository;
+  private final RentalValidator rentalValidator;
 
 
   @Override
   public Rental rentalBook(LibUser user, Book book, LocalDateTime endDate) {
-    if (rentalRepository.existRentedBookBy(book)) {
-      // 비즈니스 에러로 변경 필요. ("이미 대여된 목록입니다.")
-      throw new RuntimeException();
-    };
-
+    rentalValidator.checkRentedBook(book);
     return rentalRepository.save(
       Rental.createRental(user, endDate, book)
     );
