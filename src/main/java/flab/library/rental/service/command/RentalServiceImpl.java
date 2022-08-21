@@ -3,7 +3,6 @@ package flab.library.rental.service.command;
 import flab.library.book.domain.entity.Book;
 import flab.library.rental.domain.entity.Rental;
 import flab.library.rental.repository.RentalRepository;
-import flab.library.rental.service.RentalService;
 import flab.library.rental.service.RentalValidator;
 import flab.library.user.domain.entity.LibUser;
 import java.time.LocalDateTime;
@@ -20,7 +19,7 @@ public class RentalServiceImpl implements RentalService {
 
 
   @Override
-  public Rental rentalBook(LibUser user, Book book, LocalDateTime endDate) {
+  public Rental createRentalBook(LibUser user, Book book, LocalDateTime endDate) {
     rentalValidator.checkRentedBook(book);
     return rentalRepository.save(
       Rental.createRental(user, endDate, book)
