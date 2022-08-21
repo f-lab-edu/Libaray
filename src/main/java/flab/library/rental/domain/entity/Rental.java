@@ -1,6 +1,7 @@
 package flab.library.rental.domain.entity;
 
 import flab.library.book.domain.entity.Book;
+import flab.library.user.domain.entity.LibUser;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ public class Rental {
 
     private boolean isReturn;
 
-    private Long userId;
+    private String userId;
 
     @ManyToOne(targetEntity = Book.class)
     @JoinColumn(name="book_id")
@@ -46,10 +47,17 @@ public class Rental {
     private LocalDateTime endDate;
 
     @Builder
-    public Rental(Long userId, Book book, LocalDateTime endDate) {
+    private Rental(String userId, Book book, LocalDateTime endDate) {
         this.isReturn = false;
         this.userId = userId;
         this.book = book;
         this.endDate = endDate;
+    }
+    public static Rental createRental(LibUser user, LocalDateTime endDate, Book findBook) {
+        return Rental.builder()
+            .book(findBook)
+            .endDate(endDate)
+            .userId(user.getId())
+            .build();
     }
 }
