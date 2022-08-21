@@ -6,5 +6,5 @@ import flab.library.user.domain.entity.LibUser;
 import java.time.LocalDateTime;
 
 public interface RentalService {
-  Rental createRentalBook(LibUser user, Book book, LocalDateTime endDate);
+  Rental createRentalBook(LibUser user, Long bookId, LocalDateTime endDate);
 }

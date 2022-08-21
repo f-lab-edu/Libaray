@@ -16,8 +16,7 @@ public class RentalFacadeImpl implements RentalFacade{
 
   @Override
   public BookRental rentalBook(LibUser user, Long bookId, LocalDateTime endDate) {
-    Book findBook = null; // bookId로 찾아오기. BookService 등에서.
-    Rental rentalBook = rentalService.createRentalBook(user, findBook, endDate);
+    Rental rentalBook = rentalService.createRentalBook(user, bookId, endDate);
     return null; // Rental - to DTO -> BookRental
   }
 }
