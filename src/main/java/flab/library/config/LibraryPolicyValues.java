@@ -11,4 +11,7 @@ public class LibraryPolicyValues {
     @Value("${external.late-fee:100}")
     private long lateFeePerDay;
 
+
+    @Value("${external.renew-days:14}")
+    private long renewDays;
 }

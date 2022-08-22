@@ -5,10 +5,7 @@ import flab.library.rental.domain.RentalUserList;
 import flab.library.rental.service.facade.RentalFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/rental")
@@ -21,5 +18,13 @@ public class CheckoutController {
         return ResponseEntity.ok().body(
                 CommonResponse.success(rentalFacade.getRentalUserList(isbn)));
     }
+
+    @PatchMapping("/id/{id}/renew")
+    ResponseEntity<CommonResponse<String>> renewRental(@PathVariable Long id){
+        rentalFacade.renew(id);
+        return ResponseEntity.ok().body(CommonResponse.success(null, "Renew Completed"));
+
+    }
+
 
 }

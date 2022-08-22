@@ -23,4 +23,6 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
   @Query("select rental from Rental rental join fetch Book book " +
           "on rental.book = book where book.isbn = :isbn")
   List<Rental> findAllRentalByBookISBN(String isbn);
+
+  Optional<Rental> findRentalByIdAndIsReturnIsFalseAndRenewIsFalse(Long id);
 }

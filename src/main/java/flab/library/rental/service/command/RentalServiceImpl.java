@@ -4,6 +4,7 @@ import flab.library.book.domain.entity.Book;
 import flab.library.book.repository.BookRepository;
 import flab.library.common.exception.BusinessException;
 import flab.library.common.exception.BusinessExceptionDictionary;
+import flab.library.config.LibraryPolicyValues;
 import flab.library.rental.domain.entity.Rental;
 import flab.library.rental.repository.RentalRepository;
 import flab.library.rental.service.RentalValidator;
@@ -20,6 +21,7 @@ public class RentalServiceImpl implements RentalService {
   private final RentalRepository rentalRepository;
   private final BookRepository bookRepository;
   private final RentalValidator rentalValidator;
+  private final LibraryPolicyValues libraryPolicyValues;
 
 
   @Override
@@ -30,6 +32,17 @@ public class RentalServiceImpl implements RentalService {
     return rentalRepository.save(
       Rental.createRental(user, endDate, findBook)
     );
+  }
+
+  @Override
+  public void renew(Long rentalId) {
+    Rental rental = rentalRepository.findRentalByIdAndIsReturnIsFalseAndRenewIsFalse(rentalId)
+            .orElseThrow(() -> BusinessException.create(
+            BusinessExceptionDictionary.INVALID_RENTAL_ID));
+    rental.setEndDate(rental.getEndDate().plusDays(libraryPolicyValues.getRenewDays()));
+    rental.setRenew(true);
+    rentalRepository.save(rental);
+
   }
 
 }
