@@ -16,3 +16,4 @@ server:
 
 external:
   late-fee: 1000
+  renew-days: 7

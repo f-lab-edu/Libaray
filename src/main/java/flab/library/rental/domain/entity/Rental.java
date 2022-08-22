@@ -15,10 +15,12 @@ import javax.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+@Setter
 @Getter
 @NoArgsConstructor
 @Entity
@@ -35,6 +37,7 @@ public class Rental {
 //    RentalId rentalId;
 
     private boolean isReturn;
+    private boolean renew;
 
     @ManyToOne(targetEntity = LibUser.class)
     @JoinColumn(name="user_id")

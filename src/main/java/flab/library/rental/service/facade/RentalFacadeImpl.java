@@ -27,4 +27,9 @@ public class RentalFacadeImpl implements RentalFacade{
   public RentalUserList getRentalUserList(String isbn) {
     return rentalQueryService.getRentalUserList(isbn);
   }
+
+  @Override
+  public void renew(Long rentalId) {
+    rentalService.renew(rentalId);
+  }
 }
