@@ -13,3 +13,6 @@ spring:
     show-sql: true
 server:
   port: 8181
+
+external:
+  late-fee: 1000

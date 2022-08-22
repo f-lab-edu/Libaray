@@ -2,6 +2,8 @@ package flab.library.rental.domain.entity;
 
 import flab.library.book.domain.entity.Book;
 import flab.library.user.domain.entity.LibUser;
+
+import java.time.Instant;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +17,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 @Getter
 @NoArgsConstructor
 @Entity
@@ -22,7 +26,6 @@ public class Rental {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     /**
      * 독립적인 식별자는 필요 없을지 추후 논의하고 싶은 부분이 있습니다.
@@ -62,4 +65,5 @@ public class Rental {
             .user(user)
             .build();
     }
+
 }

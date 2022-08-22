@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import flab.library.book.domain.entity.Book;
 import flab.library.rental.domain.entity.Rental;
+import flab.library.rental.service.query.RentalQueryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import flab.library.user.domain.UserVO;
@@ -12,7 +14,10 @@ import flab.library.user.domain.entity.LibUser;
 import flab.library.user.dto.SignUpDto;
 
 @Service
+@RequiredArgsConstructor
 public class LibUserMapper {
+
+	private final RentalQueryService rentalQueryService;
 
 	private UserVO.UserBookVO toUserBookVO(Rental rental){
 		Book book = rental.getBook();
@@ -21,6 +26,7 @@ public class LibUserMapper {
 				.isbn(book.getIsbn())
 				.startDate(rental.getStartDate())
 				.endDate(rental.getEndDate())
+				.lateFee(rentalQueryService.getLateFee(rental))
 				.build();
 
 	}
