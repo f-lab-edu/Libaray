@@ -1,11 +1,10 @@
 package flab.library.user.domain.entity;
 
+import flab.library.rental.domain.entity.Rental;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -25,5 +24,8 @@ public class LibUser {
 
     @Column(nullable = false)
     boolean active = true;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Rental> rentalList;
 
 }

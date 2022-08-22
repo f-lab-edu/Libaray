@@ -33,7 +33,9 @@ public class Rental {
 
     private boolean isReturn;
 
-    private String userId;
+    @ManyToOne(targetEntity = LibUser.class)
+    @JoinColumn(name="user_id")
+    private LibUser user;
 
     @ManyToOne(targetEntity = Book.class)
     @JoinColumn(name="book_id")
@@ -47,9 +49,9 @@ public class Rental {
     private LocalDateTime endDate;
 
     @Builder
-    private Rental(String userId, Book book, LocalDateTime endDate) {
+    private Rental(LibUser user, Book book, LocalDateTime endDate) {
         this.isReturn = false;
-        this.userId = userId;
+        this.user = user;
         this.book = book;
         this.endDate = endDate;
     }
@@ -57,7 +59,7 @@ public class Rental {
         return Rental.builder()
             .book(findBook)
             .endDate(endDate)
-            .userId(user.getId())
+            .user(user)
             .build();
     }
 }
