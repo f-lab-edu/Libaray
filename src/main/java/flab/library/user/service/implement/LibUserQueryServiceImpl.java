@@ -14,15 +14,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LibUserQueryServiceImpl {
 
-	private final LibUserRepository libUserRepository;
-	private final LibUserMapper libUserMapper;
+    private final LibUserRepository libUserRepository;
+    private final LibUserMapper libUserMapper;
 
-	public UserVO getLibUser(String id) {
-		return libUserMapper.toVO(
-			libUserRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException(id + "not found")));
-	}
+    public UserVO getLibUser(String id) {
+        return libUserMapper.toVO(
+                libUserRepository.findLibUserByIdFetchRental(id)
+						.orElseThrow(() -> new UsernameNotFoundException(id + "not found")));
+    }
 
-	public List<UserVO> getLibUserList() {
-		return libUserRepository.findAll().stream().map(libUserMapper::toVO).collect(Collectors.toList());
-	}
+    public List<UserVO> getLibUserList() {
+        return libUserRepository.findAllFetchRental().stream()
+                .map(libUserMapper::toVO).collect(Collectors.toList());
+    }
 }
