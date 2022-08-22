@@ -24,6 +24,7 @@ public class LibUserQueryServiceImpl {
     }
 
     public List<UserVO> getLibUserList() {
-        return libUserRepository.findAll().stream().map(libUserMapper::toVO).collect(Collectors.toList());
+        return libUserRepository.findAllFetchRental().stream()
+                .map(libUserMapper::toVO).collect(Collectors.toList());
     }
 }
