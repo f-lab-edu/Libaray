@@ -29,7 +29,7 @@ public class RentalQueryServiceImpl implements RentalQueryService{
         List<Rental> rentalList = rentalRepository.findAllRentalByBookISBN(isbn);
 
         return RentalUsers.builder()
-                .rentalUserList(
+                .rentalUsers(
                         rentalList.stream()
                                 .map(rentalMapper::toRentalUser)
                                 .collect(Collectors.toList())
