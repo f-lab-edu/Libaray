@@ -21,9 +21,9 @@ public class RentalFacadeImpl implements RentalFacade{
   private final RentalQueryService rentalQueryService;
 
   @Override
-  public BookRentalResponseDto rentalBook(LibUser user, Long bookId, LocalDateTime endDate) {
+  public Long rentalBook(LibUser user, Long bookId, LocalDateTime endDate) {
     Rental rentalBook = rentalService.createRentalBook(user, bookId, endDate);
-    return null; // Rental - to DTO -> BookRental
+    return rentalBook.getId();
   }
 
   @Override
