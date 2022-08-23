@@ -23,7 +23,6 @@ public class CheckoutController {
     ResponseEntity<CommonResponse<String>> renewRental(@PathVariable Long id){
         rentalFacade.renew(id);
         return ResponseEntity.ok().body(CommonResponse.success(null, "Renew Completed"));
-
     }
 
 

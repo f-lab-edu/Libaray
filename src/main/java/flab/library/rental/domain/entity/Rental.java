@@ -36,7 +36,7 @@ public class Rental {
 //    @EmbeddedId
 //    RentalId rentalId;
 
-    private boolean isReturn;
+    private LocalDateTime returnDate;
     private boolean renew;
 
     @ManyToOne(targetEntity = LibUser.class)
@@ -56,7 +56,7 @@ public class Rental {
 
     @Builder
     private Rental(LibUser user, Book book, LocalDateTime endDate) {
-        this.isReturn = false;
+        this.returnDate = null;
         this.user = user;
         this.book = book;
         this.endDate = endDate;
