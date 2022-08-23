@@ -1,6 +1,7 @@
 package flab.library.rental.service.command;
 
 import flab.library.book.domain.entity.Book;
+import flab.library.book.infrastructure.cache.BookCacheStore;
 import flab.library.book.repository.BookRepository;
 import flab.library.common.exception.BusinessException;
 import flab.library.common.exception.BusinessExceptionDictionary;
@@ -22,6 +23,7 @@ public class RentalServiceImpl implements RentalService {
   private final BookRepository bookRepository;
   private final RentalValidator rentalValidator;
   private final LibraryPolicyValues libraryPolicyValues;
+  private final BookCacheStore bookCacheStore;
 
 
   @Override
@@ -29,9 +31,9 @@ public class RentalServiceImpl implements RentalService {
     Book findBook = bookRepository.findById(bookId).orElseThrow(() -> BusinessException.create(
         BusinessExceptionDictionary.BOOK_NOT_FOUND_EXCEPTION));
     rentalValidator.checkRentedBook(findBook);
-    return rentalRepository.save(
-      Rental.createRental(user, endDate, findBook)
-    );
+    Rental saveRental = rentalRepository.save(Rental.createRental(user, endDate, findBook));
+    bookCacheStore.increaseRentalCount(findBook.getIsbn());
+    return saveRental;
   }
 
   @Override
