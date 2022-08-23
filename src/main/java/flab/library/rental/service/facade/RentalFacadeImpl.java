@@ -32,4 +32,8 @@ public class RentalFacadeImpl implements RentalFacade{
   public void renew(Long rentalId) {
     rentalService.renew(rentalId);
   }
+  @Override
+  public void returnBooks(Long rentalId) {
+    rentalService.returnBook(rentalId);
+  }
 }

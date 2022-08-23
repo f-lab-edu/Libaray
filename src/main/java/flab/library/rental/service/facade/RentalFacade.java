@@ -11,4 +11,5 @@ public interface RentalFacade {
   BookRental rentalBook(LibUser user, Long bookId, LocalDateTime endDate);
   RentalUserList getRentalUserList(String isbn);
   void renew(Long rentalId);
+  void returnBooks(Long rentalId);
 }
