@@ -5,13 +5,8 @@ import flab.library.user.domain.entity.LibUser;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,11 +27,11 @@ public class Rental {
     private LocalDateTime returnDate;
     private boolean renew;
 
-    @ManyToOne(targetEntity = LibUser.class)
+    @ManyToOne(targetEntity = LibUser.class, fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private LibUser user;
 
-    @ManyToOne(targetEntity = Book.class)
+    @ManyToOne(targetEntity = Book.class, fetch = FetchType.LAZY)
     @JoinColumn(name="book_id")
     Book book;
 
