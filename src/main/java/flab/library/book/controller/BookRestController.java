@@ -1,5 +1,6 @@
 package flab.library.book.controller;
 
+import flab.library.book.dto.BookDto;
 import flab.library.book.dto.BookRequestDto.BookCreateRequest;
 import flab.library.book.dto.BookRequestDto.BookUpdateRequest;
 import flab.library.book.dto.BookResponseDto.BookCreateResponse;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/book")
@@ -50,6 +53,11 @@ public class BookRestController {
   public CommonResponse showBooks(@PageableDefault(page = 0, size = 10) Pageable pageable) {
     Page<BookResponse> allBooks = bookFacade.getAllBooks(pageable);
     return CommonResponse.success(allBooks, "책 전체 목록 조회(page, size) 매개변수를 통해 페이징");
+  }
+
+  @GetMapping("/rank")
+  public CommonResponse showBookRanks(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+    return CommonResponse.success(bookFacade.getRankBooks(pageable));
   }
 
 }
