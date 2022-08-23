@@ -22,7 +22,7 @@ public class BookCacheStore {
         cacheStore.incrementScore(BOOK_RENTAL_RANKING, isbn, 1L);
     }
 
-    Set<ZSetOperations.TypedTuple<String>> getRentalRanksWithScore(Pageable pageable) {
+    public Set<ZSetOperations.TypedTuple<String>> getRentalRanksWithScore(Pageable pageable) {
         return cacheStore.getRanksWithScore(BOOK_RENTAL_RANKING, pageable);
     }
 }
