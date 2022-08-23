@@ -1,7 +1,7 @@
 package flab.library.rental.service.query;
 
 import flab.library.config.LibraryPolicyValues;
-import flab.library.rental.domain.RentalUserList;
+import flab.library.rental.domain.RentalUsers;
 import flab.library.rental.domain.entity.Rental;
 import flab.library.rental.repository.RentalRepository;
 import flab.library.rental.service.RentalMapper;
@@ -25,10 +25,10 @@ public class RentalQueryServiceImpl implements RentalQueryService{
     private final LibraryPolicyValues libraryPolicyValues;
 
     @Override
-    public RentalUserList getRentalUserList(String isbn) {
+    public RentalUsers getRentalUserList(String isbn) {
         List<Rental> rentalList = rentalRepository.findAllRentalByBookISBN(isbn);
 
-        return RentalUserList.builder()
+        return RentalUsers.builder()
                 .rentalUserList(
                         rentalList.stream()
                                 .map(rentalMapper::toRentalUser)

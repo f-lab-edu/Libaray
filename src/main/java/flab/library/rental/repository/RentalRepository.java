@@ -35,5 +35,6 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
           "and r.returnDate is null ")
   Optional<Rental> findNotReturnedRentalById(@Param("rentalId") Long rentalId);
 
+  
 
 }

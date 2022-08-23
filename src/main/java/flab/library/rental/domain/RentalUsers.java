@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter @Builder
-public class RentalUserList {
+public class RentalUsers {
     String title;
     String isbn;
     List<RentalUser> rentalUserList;

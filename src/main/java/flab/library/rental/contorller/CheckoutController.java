@@ -1,7 +1,7 @@
 package flab.library.rental.contorller;
 
 import flab.library.common.dto.CommonResponse;
-import flab.library.rental.domain.RentalUserList;
+import flab.library.rental.domain.RentalUsers;
 import flab.library.rental.service.facade.RentalFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ public class CheckoutController {
     private final RentalFacade rentalFacade;
 
     @GetMapping("/isbn/{isbn}")
-    ResponseEntity<CommonResponse<RentalUserList>> getRentalUserList(@PathVariable String isbn){
+    ResponseEntity<CommonResponse<RentalUsers>> getRentalUserList(@PathVariable String isbn){
         return ResponseEntity.ok().body(
                 CommonResponse.success(rentalFacade.getRentalUserList(isbn)));
     }

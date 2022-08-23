@@ -1,7 +1,6 @@
 package flab.library.rental.service.facade;
 
-import flab.library.book.domain.entity.Book;
-import flab.library.rental.domain.RentalUserList;
+import flab.library.rental.domain.RentalUsers;
 import flab.library.rental.domain.entity.Rental;
 import flab.library.rental.dto.BookRental;
 import flab.library.rental.service.command.RentalService;
@@ -24,7 +23,7 @@ public class RentalFacadeImpl implements RentalFacade{
   }
 
   @Override
-  public RentalUserList getRentalUserList(String isbn) {
+  public RentalUsers getRentalUserList(String isbn) {
     return rentalQueryService.getRentalUserList(isbn);
   }
 
