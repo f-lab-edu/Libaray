@@ -1,4 +1,4 @@
-package flab.library.rental.infrastructure.cache;
+package flab.library.book.infrastructure.cache;
 
 import flab.library.common.exception.BusinessException;
 import flab.library.common.exception.BusinessExceptionDictionary;
@@ -12,17 +12,17 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
-public class RentalCacheStore {
-    public static final String RENTAL_RANKING = "RENTAL_RANKING";
+public class BookCacheStore {
+    public static final String BOOK_RENTAL_RANKING = "BOOK_RENTAL_RANKING";
     private final CacheStore cacheStore;
 
     public void increaseRentalCount(String isbn) {
         if (isbn == null)
             BusinessException.createAndThrow(BusinessExceptionDictionary.BOOK_NOT_FOUND_EXCEPTION);
-        cacheStore.incrementScore(RENTAL_RANKING, isbn, 1L);
+        cacheStore.incrementScore(BOOK_RENTAL_RANKING, isbn, 1L);
     }
 
     Set<ZSetOperations.TypedTuple<String>> getRentalRanksWithScore(Pageable pageable) {
-        return cacheStore.getRanksWithScore(RENTAL_RANKING, pageable);
+        return cacheStore.getRanksWithScore(BOOK_RENTAL_RANKING, pageable);
     }
 }
