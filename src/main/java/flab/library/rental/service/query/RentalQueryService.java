@@ -4,6 +4,6 @@ import flab.library.rental.domain.RentalUsers;
 import flab.library.rental.domain.entity.Rental;
 
 public interface RentalQueryService {
-    RentalUsers getRentalUserList(String isbn);
+    RentalUsers getRentalUsers(String isbn);
     Long getLateFee(Rental rental);
 }

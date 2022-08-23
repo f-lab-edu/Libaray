@@ -24,7 +24,7 @@ public class RentalFacadeImpl implements RentalFacade{
 
   @Override
   public RentalUsers getRentalUserList(String isbn) {
-    return rentalQueryService.getRentalUserList(isbn);
+    return rentalQueryService.getRentalUsers(isbn);
   }
 
   @Override

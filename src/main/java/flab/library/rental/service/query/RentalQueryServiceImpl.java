@@ -25,7 +25,7 @@ public class RentalQueryServiceImpl implements RentalQueryService{
     private final LibraryPolicyValues libraryPolicyValues;
 
     @Override
-    public RentalUsers getRentalUserList(String isbn) {
+    public RentalUsers getRentalUsers(String isbn) {
         List<Rental> rentalList = rentalRepository.findAllRentalByBookISBN(isbn);
 
         return RentalUsers.builder()
