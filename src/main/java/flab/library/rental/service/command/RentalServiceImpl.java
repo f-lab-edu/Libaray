@@ -36,13 +36,17 @@ public class RentalServiceImpl implements RentalService {
 
   @Override
   public void renew(Long rentalId) {
-    Rental rental = rentalRepository.findRentalByIdAndIsReturnIsFalseAndRenewIsFalse(rentalId)
+    Rental rental = rentalRepository.findNotReturnedRentalById(rentalId)
             .orElseThrow(() -> BusinessException.create(
             BusinessExceptionDictionary.INVALID_RENTAL_ID));
     rental.setEndDate(rental.getEndDate().plusDays(libraryPolicyValues.getRenewDays()));
     rental.setRenew(true);
     rentalRepository.save(rental);
-
   }
 
+  @Override
+  public Long returnBook(Long rentalId) {
+
+    return null;
+  }
 }

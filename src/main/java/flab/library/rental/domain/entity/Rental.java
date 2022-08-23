@@ -29,13 +29,6 @@ public class Rental {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * 독립적인 식별자는 필요 없을지 추후 논의하고 싶은 부분이 있습니다.
-     * 추가적으로 전부 참조 관계로 유지해도 될지도 논의해보고 싶습니다.
-     */
-//    @EmbeddedId
-//    RentalId rentalId;
-
     private LocalDateTime returnDate;
     private boolean renew;
 
