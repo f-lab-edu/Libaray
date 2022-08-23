@@ -6,6 +6,8 @@ import flab.library.rental.domain.entity.Rental;
 import flab.library.rental.repository.RentalRepository;
 import flab.library.rental.service.RentalMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -42,5 +44,10 @@ public class RentalQueryServiceImpl implements RentalQueryService{
         LocalDateTime current = LocalDateTime.ofInstant(Instant.now(), ZoneOffset.ofHours(9));
         long days = DAYS.between(rental.getEndDate(), current);
         return days <= 0L ? 0L : days  * libraryPolicyValues.getLateFeePerDay();
+    }
+
+    @Override
+    public Page<Rental> getOngoingRentals(Pageable pageable) {
+        return rentalRepository.findAllRentalOngoing(pageable);
     }
 }
