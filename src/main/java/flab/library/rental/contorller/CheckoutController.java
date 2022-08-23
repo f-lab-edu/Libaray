@@ -23,7 +23,12 @@ public class CheckoutController {
     ResponseEntity<CommonResponse<String>> renewRental(@PathVariable Long id){
         rentalFacade.renew(id);
         return ResponseEntity.ok().body(CommonResponse.success(null, "Renew Completed"));
+    }
 
+    @PutMapping("/{rentalId}/return")
+    CommonResponse<Void> returnBook(@PathVariable Long rentalId) {
+        rentalFacade.renew(rentalId);
+        return CommonResponse.success();
     }
 
 
