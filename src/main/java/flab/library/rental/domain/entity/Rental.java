@@ -62,4 +62,7 @@ public class Rental {
             .build();
     }
 
+    public void returnBook() {
+        this.returnDate = LocalDateTime.now();
+    }
 }

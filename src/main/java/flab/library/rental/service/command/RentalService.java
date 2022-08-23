@@ -8,5 +8,5 @@ import java.time.LocalDateTime;
 public interface RentalService {
   Rental createRentalBook(LibUser user, Long bookId, LocalDateTime endDate);
   void renew(Long rentalId);
-  Long returnBook(Long rentalId);
+  void returnBook(Long rentalId);
 }

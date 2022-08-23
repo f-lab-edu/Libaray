@@ -27,6 +27,12 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
           "where r.id = :rentalId " +
           "and r.returnDate is null " +
           "and r.renew = false ")
+  Optional<Rental> findNotReturnedAndNotRenewedRentalById(@Param("rentalId") Long rentalId);
+
+  @Query("select r " +
+          "from Rental r " +
+          "where r.id = :rentalId " +
+          "and r.returnDate is null ")
   Optional<Rental> findNotReturnedRentalById(@Param("rentalId") Long rentalId);
 
 
