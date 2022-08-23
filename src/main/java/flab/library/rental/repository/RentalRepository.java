@@ -6,6 +6,8 @@ import flab.library.rental.domain.entity.Rental;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -35,6 +37,11 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
           "and r.returnDate is null ")
   Optional<Rental> findNotReturnedRentalById(@Param("rentalId") Long rentalId);
 
-  
+  @Query("select rental " +
+          "from Rental rental " +
+          "join fetch Book book on rental.book = book " +
+          "where rental.returnDate is null ")
+  Page<Rental> findAllRentalOngoing(Pageable pageable);
+
 
 }
