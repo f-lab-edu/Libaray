@@ -1,11 +1,13 @@
 package flab.library.rental.service.query;
 
 import flab.library.config.LibraryPolicyValues;
-import flab.library.rental.domain.RentalUserList;
+import flab.library.rental.domain.RentalUsers;
 import flab.library.rental.domain.entity.Rental;
 import flab.library.rental.repository.RentalRepository;
 import flab.library.rental.service.RentalMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -25,11 +27,11 @@ public class RentalQueryServiceImpl implements RentalQueryService{
     private final LibraryPolicyValues libraryPolicyValues;
 
     @Override
-    public RentalUserList getRentalUserList(String isbn) {
+    public RentalUsers getRentalUsers(String isbn) {
         List<Rental> rentalList = rentalRepository.findAllRentalByBookISBN(isbn);
 
-        return RentalUserList.builder()
-                .rentalUserList(
+        return RentalUsers.builder()
+                .rentalUsers(
                         rentalList.stream()
                                 .map(rentalMapper::toRentalUser)
                                 .collect(Collectors.toList())
@@ -42,5 +44,10 @@ public class RentalQueryServiceImpl implements RentalQueryService{
         LocalDateTime current = LocalDateTime.ofInstant(Instant.now(), ZoneOffset.ofHours(9));
         long days = DAYS.between(rental.getEndDate(), current);
         return days <= 0L ? 0L : days  * libraryPolicyValues.getLateFeePerDay();
+    }
+
+    @Override
+    public Page<Rental> getOngoingRentals(Pageable pageable) {
+        return rentalRepository.findAllRentalOngoing(pageable);
     }
 }
