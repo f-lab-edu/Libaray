@@ -9,8 +9,13 @@ spring:
     database: mysql
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
+  redis:
+    host: localhost
+    port: 6379
+
+
 server:
   port: 8181
 
