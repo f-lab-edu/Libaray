@@ -43,6 +43,7 @@ public class SecurityConfig  {
 
                 .authorizeRequests()
                 .antMatchers("/v1/users/sign-up").permitAll()
+                .antMatchers("/**").permitAll() // 테스트용
                 .anyRequest().authenticated()
 
                 .and()

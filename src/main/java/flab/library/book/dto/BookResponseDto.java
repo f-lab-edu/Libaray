@@ -33,12 +33,14 @@ public class BookResponseDto {
   }
   @Getter
   public static class BookResponse {
+    private Long id;
     private String title;
     private String content;
     private String isbn;
     private BookCategory category;
 
     public BookResponse(Book book) {
+      this.id = book.getId();
       this.title = book.getTitle();
       this.content = book.getContent();
       this.isbn = book.getIsbn();
