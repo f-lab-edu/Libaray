@@ -9,9 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
-    @Query("select b.isbn, b " +
+    @Query("select b " +
             "from Book b " +
-            "where b.isbn in (:isbnList) " +
-            "group by b.isbn ")
-    HashMap<String, Book> findAllByISBN(@Param("isbnList") List<String> isbnList);
+            "where b.isbn in (:isbnList) ")
+    List<Book> findAllByISBN(@Param("isbnList") List<String> isbnList);
 }

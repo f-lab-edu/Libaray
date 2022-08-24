@@ -34,7 +34,10 @@ public class BookQueryServiceImpl implements BookQueryService{
     Set<ZSetOperations.TypedTuple<String>> bookRank = bookCacheStore.getRentalRanksWithScore(pageable);
     List<String> isbnList
             = bookRank.stream().map(ZSetOperations.TypedTuple::getValue).collect(Collectors.toList());
-    HashMap<String, Book> bookMap = bookRepository.findAllByISBN(isbnList);
+
+    HashMap<String, Book> bookMap = new HashMap<>();
+    bookRepository.findAllByISBN(isbnList).stream()
+            .forEach(book -> bookMap.put(book.getIsbn(), book));
 
     long rank = pageable.getOffset() * pageable.getPageSize() + 1;
     for (ZSetOperations.TypedTuple<String> ranking : bookRank) {
