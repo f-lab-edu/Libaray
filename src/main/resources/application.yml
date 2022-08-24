@@ -9,5 +9,16 @@ spring:
     database: mysql
     generate-ddl: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     show-sql: true
+  redis:
+    host: localhost
+    port: 6379
+
+
+server:
+  port: 8181
+
+external:
+  late-fee: 1000
+  renew-days: 7

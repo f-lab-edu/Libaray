@@ -13,6 +13,10 @@ public class CommonResponse<T> {
   private String message;
   private int code;
 
+  public static CommonResponse<Void> success() {
+    return success(null, null);
+  }
+
   public static <T> CommonResponse<T> success(T data) {
     return success(data, null);
   }
@@ -39,6 +43,15 @@ public class CommonResponse<T> {
         .message(message)
         .data(data)
         .code(-1)
+        .build();
+  }
+
+  public static <T> CommonResponse<T> fail(String message, T data, int errorCode) {
+    return CommonResponse.<T>builder()
+        .result(Result.FAIL)
+        .message(message)
+        .data(data)
+        .code(errorCode)
         .build();
   }
 
